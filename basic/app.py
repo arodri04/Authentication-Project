@@ -2,6 +2,7 @@ from flask import Flask, request, abort, jsonify, session
 from flask_session import Session
 from models import db, User
 from config import ApplicationConfig
+import hashlib
 
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
@@ -21,8 +22,8 @@ def homepage():
 @app.route("/register", methods=['POST'])
 def register_user():
     email = request.json["email"]
-    password = request.json["password"]
-
+    password = hashlib.sha256(request.json["password"].encode('utf-8')).hexdigest()
+    
     user_exists = User.query.filter_by(email=email).first() is not None
 
     if user_exists:
@@ -41,7 +42,7 @@ def register_user():
 @app.route("/login", methods=["POST"])
 def login_user():
     email = request.json["email"]
-    password = request.json["password"]
+    password = hashlib.sha256(request.json["password"].encode('utf-8')).hexdigest()
 
     user = User.query.filter_by(email=email).first()
     
