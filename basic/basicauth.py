@@ -3,7 +3,8 @@ import hashlib
 # uname = input("Enter Username: ")
 # passwd = input("Enter Password: ")
 #Dictionary of verified users
-users = {"test": ["123", "This is the Secret Message"], "test1": ["1234", "This is the Secret Message number 2"]}
+users = {"test": ["123", "This is the Secret Message"],
+        "test1": ["1234", "This is the Secret Message number 2"]}
 
 def verify(usern, pwd):
     if usern in users and users[usern][0] == pwd:
@@ -11,7 +12,7 @@ def verify(usern, pwd):
     else:
         print("could not verify")
 
-# verify(uname, passwd)
+#verify(uname, passwd)
 
 users = {"test": ["123", "This is the Secret Message"], "test1": ["1234", "This is the Secret Message number 2"]}
 

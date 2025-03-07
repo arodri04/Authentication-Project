@@ -1,4 +1,4 @@
-from flask import Flask, request, abort, jsonify, session
+from flask import Flask, request, abort, jsonify, session, render_template
 from flask_session import Session
 from models import db, User
 from config import ApplicationConfig
@@ -19,7 +19,11 @@ with app.app_context():
 def homepage():
     return "<p>This is the homepage</p>"
 
-@app.route("/register", methods=['POST'])
+@app.route("/register", methods=["GET"])
+def register():
+    return render_template('./register.html')
+
+@app.route("/submit_register", methods=['POST'])
 def register_user():
     email = request.json["email"]
     password = hashlib.sha256(request.json["password"].encode('utf-8')).hexdigest()
@@ -39,10 +43,15 @@ def register_user():
         "email": new_user.email
     })
 
-@app.route("/login", methods=["POST"])
-def login_user():
-    email = request.json["email"]
-    password = hashlib.sha256(request.json["password"].encode('utf-8')).hexdigest()
+
+@app.route("/login", methods=["GET"])
+def login():
+    return render_template('./login.html')
+
+@app.route("/submit", methods=["POST"])
+def submit_login():
+    email = request.form["email"]
+    password = hashlib.sha256(request.form["password"].encode('utf-8')).hexdigest()
 
     user = User.query.filter_by(email=email).first()
     
@@ -72,7 +81,10 @@ def get_name():
         "name": user.email
     })
 
-
+@app.route("/logout")
+def logout():
+    session.pop('user_id', None)
+    return render_template("./login.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
