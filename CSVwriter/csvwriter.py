@@ -6,7 +6,7 @@ header = [["id", "FirstName", "LastName"]]
 doorHeader = [["id", "FirstName","LastName", "Time"]]
 users = [[1, "Sam", "Rodriguez",], [2, "Tae", "Bailon"]]
 
-def read_row(userID):
+def read_user(userID):
     with open("users.csv", "r") as file:
         csvreader = csv.reader(file)
         next(csvreader)
@@ -20,4 +20,4 @@ def doorTime(user):
         csvwriter = csv.writer(doorcsv)        
         csvwriter.writerow(user)
 
-read_row(2)
+read_user(2)
