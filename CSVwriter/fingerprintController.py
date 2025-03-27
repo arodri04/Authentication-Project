@@ -8,7 +8,7 @@ import adafruit_fingerprint
 led = DigitalInOut(board.D13)
 led.direction = Direction.OUTPUT
 
-uart = busio.UART(board.TX, board.RX, baudrate=57600)
+#uart = busio.UART(board.TX, board.RX, baudrate=57600)
 
 # If using with Linux/Raspberry Pi and hardware UART:
 import serial
@@ -28,8 +28,8 @@ def get_fingerprint():
     print("Searching...")
     if finger.finger_search() != adafruit_fingerprint.OK:
         return False
-    if finger.confidence >= 90: ###THIS IS TO WORK THE CSV
-        read_user(finger.finger_id)
+    print(f"finger id: {finger.finger_id}")
+    read_user(finger.finger_id)
     return True
 
 

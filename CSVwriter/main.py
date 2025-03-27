@@ -7,12 +7,11 @@ if __name__ == "__main__":
     print("2) Find Print")
     print("---------------------------")
     choice = input("Enter Number: ")
-    match choice:
-        case "1":
-            print("enroll")
-            enroll_finger(get_num())
-        case "2":
-            print("find")
-            get_fingerprint()
-        case _:
-            print("Not Valid")
+    if choice == "1":
+        print("enroll")
+        enroll_finger(get_num())
+    elif choice == "2":
+        print("find")
+        get_fingerprint()
+    else:
+        print("Not Valid")
