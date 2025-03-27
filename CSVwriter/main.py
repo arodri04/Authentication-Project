@@ -1,7 +1,5 @@
 from fingerprintController import *
 
-
-
 if __name__ == "__main__":
     print("---------------------------")
     print("Please Choose an Option")

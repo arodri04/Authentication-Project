@@ -28,4 +28,3 @@ def add_user(userID):
         csvwriter.writerow(new_user)
 
 
-read_user(2)
